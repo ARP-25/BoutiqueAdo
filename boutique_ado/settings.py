@@ -27,10 +27,10 @@ SECRET_KEY = 'django-insecure-ds-r0-&xlxnvhio57%@=1@c*!!+@e#f($ho*q%!y%v$v4=46x&
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu106.gitpod.io',
+    '8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu106.gitpod.io','8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu107.gitpod.io',
     'localhost',
 ]
-CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu106.gitpod.io',
+CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu106.gitpod.io','https://8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu107.gitpod.io',
     'https://localhost',]
 
 # Application definition
@@ -99,6 +99,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1 #Used by social account app to create proper callback urls when connecting via social media
+
+# Required for message jhandling
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 ##
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
