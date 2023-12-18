@@ -47,10 +47,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    # Custom
     'home',
     'products',
     'bag',
     'checkout',
+    # Other
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +75,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # Linking our templates up with Django
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates', 'allauth'),
         ],
@@ -79,12 +82,16 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                # `allauth` needs this from django
+                'django.template.context_processors.request', # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 'bag.contexts.bag_contents',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
@@ -104,8 +111,12 @@ SITE_ID = 1 #Used by social account app to create proper callback urls when conn
 # Required for message jhandling
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-##
+#
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 #
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -115,6 +126,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
+#
 WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 
 
