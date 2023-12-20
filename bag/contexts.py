@@ -10,7 +10,16 @@ def bag_contents(request):
     product_count = 0
     bag = request.session.get('bag', {})
 
-    for item_id, item_data in bag.items():
+    bag_copy = bag.copy()  # Create a copy of the bag dictionary because we cant delete directly when we iterate over it
+    for item_id, item_data in bag_copy.items():
+        try:
+            product = Product.objects.get(pk=item_id)
+        except Product.DoesNotExist:
+            # Handle cases where the product doesn't exist by removing it from the bag
+            del bag[item_id]
+            request.session.modified = True  # Save the modified session
+            continue 
+
         if isinstance(item_data, int):
             product = get_object_or_404(Product, pk=item_id)
             total += item_data * product.price
