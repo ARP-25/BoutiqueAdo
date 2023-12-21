@@ -114,8 +114,6 @@ SITE_ID = 1 #Used by social account app to create proper callback urls when conn
 # Required for message jhandling
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-#
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -230,6 +228,16 @@ STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
-#STRIPE_PUBLIC_KEY = 'pk_test_51OOhcmL1KLkVpLL6W36Gld3ByPSZJP1lwqC0nxwXtjp7JcIwgfXU3QnsOewy7i3RXddHzXMT6CpIjdJyIU6ae2Of000YX9CcCP'
-#STRIPE_SECRET_KEY = 'sk_test_51OOhcmL1KLkVpLL62dTdKSls6ivW2bWLjSNW8ZUNu2mISnZNM5YlElPC0342cu9DMEVgjnME2izl5yzCJHdJfF4300Mga4gbEL'
-DEFAULT_FROM_EMAIL = 'boutiqueado@example.com'
+
+# Email setup
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'boutiqueado@example.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp-mail.outlook.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
