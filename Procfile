@@ -1,1 +1,1 @@
-web: gunicorn arp25-boutique-ado:application
+web: gunicorn boutique-ado:application
