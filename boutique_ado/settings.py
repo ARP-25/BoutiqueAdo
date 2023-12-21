@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu106.gitpod.io','8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu107.gitpod.io',
-    'localhost', 'https://arp25-boutique-ado-6c567a61093f.herokuapp.com/'
+    'localhost', 'https://arp25-boutique-ado-6c567a61093f.herokuapp.com/', 'arp25-boutique-ado-6c567a61093f.herokuapp.com',
 ]
 CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu106.gitpod.io','https://8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu107.gitpod.io',
     'https://localhost',]
