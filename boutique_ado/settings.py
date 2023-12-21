@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu106.gitpod.io','8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu107.gitpod.io',
-    'localhost',
+    'localhost', 'https://arp25-boutique-ado-6c567a61093f.herokuapp.com/'
 ]
 CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu106.gitpod.io','https://8000-arp25-boutiqueadov1-uks9zjol61p.ws-eu107.gitpod.io',
     'https://localhost',]
@@ -134,12 +135,19 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
 
 
 # Password validation
